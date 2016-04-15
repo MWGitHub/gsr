@@ -32789,7 +32789,6 @@
 	  _createClass(NotFound, [{
 	    key: "render",
 	    value: function render() {
-	      console.log(this.props);
 	      return _react2.default.createElement(
 	        "div",
 	        { className: "status-page" },
