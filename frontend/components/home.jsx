@@ -15,7 +15,8 @@ class Home extends React.Component {
 
   drawGraph() {
     let graph = document.getElementById('graph');
-    if (graph) graph.remove();
+    let existing = !!graph;
+    //if (graph) graph.remove();
 
     const barPadding = 1;
     const margin = {
@@ -126,38 +127,103 @@ class Home extends React.Component {
         .tickPadding(barPadding)
         .tickFormat(formatAsYear);
 
-      const svg = d3.select('#data').append('svg')
-        .attr('id', 'graph')
-        .attr('width', width + margin.left + margin.right)
-        .attr('height', height + margin.top + margin.bottom)
-      .append('g')
-        .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+      let svg;
+      if (!existing) {
+        svg = d3.select('#data').append('svg')
+          .attr('id', 'graph')
+          .attr('width', width + margin.left + margin.right)
+          .attr('height', height + margin.top + margin.bottom)
+        .append('g')
+          .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-      svg.selectAll('.data-option-1')
-        .data(parsedR1Data)
-        .enter()
-        .append('rect')
-        .attr('fill', 'rgba(70, 164, 217, 0.5)')
-        .attr('class', 'bar primary')
-        .attr('x', (d, i) => {
-          return i * (width / parsedR1Data.length);
-        })
-        .attr('y', d => {
-          let amount = d.value;
-          return yScale(amount);
-        })
-        .attr('width', width / parsedR1Data.length - barPadding)
-        .attr('height', d => {
-          let amount = d.value;
-          return height - yScale(amount);
-        });
+        // svg.append('g')
+        //   .attr('class', 'month-axis')
+        //   .attr('transform', 'translate(0,' + (height + 1) + ')')
+        //   .call(monthAxis);
 
-      svg.selectAll('.data-option-2')
+        svg.append('g')
+          .attr('class', 'year-axis')
+          .attr('transform', 'translate(0,' + height + ')')
+          .call(yearAxis);
+
+        svg.append('g')
+          .attr('class', 'y-axis')
+          .attr('transform', 'translate(' + 0 + ', 0)')
+          .call(yAxis)
+        .append('text')
+          .attr('transform', 'rotate(0)')
+          .attr('y', 6)
+          .attr('dy', '-1rem')
+          .attr('dx', '5rem')
+          .style('text-anchor', 'end')
+          .text('Monthly Price ($)');
+      } else {
+        svg = d3.select('#graph')
+          .attr('id', 'graph')
+          .attr('width', width + margin.left + margin.right)
+          .attr('height', height + margin.top + margin.bottom)
+        .select('g')
+          .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+        svg.select('g.year-axis')
+          .attr('class', 'year-axis')
+          .attr('transform', 'translate(0,' + height + ')')
+          .call(yearAxis);
+
+        svg.select('g.y-axis')
+          .attr('class', 'y-axis')
+          .attr('transform', 'translate(' + 0 + ', 0)')
+          .call(yAxis)
+      }
+
+      let dataOptions1 = svg.selectAll('.data-option-1');
+      if (dataOptions1[0].length === 0) {
+        dataOptions1
+          .data(parsedR1Data)
+          .enter()
+          .append('rect')
+          .attr('fill', 'rgba(70, 164, 217, 0.5)')
+          .attr('class', 'data-option-1 bar primary')
+          .attr('x', (d, i) => {
+            return i * (width / parsedR1Data.length);
+          })
+          .attr('y', d => {
+            let amount = d.value;
+            return yScale(amount);
+          })
+          .attr('width', width / parsedR1Data.length - barPadding)
+          .attr('height', d => {
+            let amount = d.value;
+            return height - yScale(amount);
+          });
+      } else {
+        dataOptions1
+          .data(parsedR1Data)
+          .transition()
+          .attr('fill', 'rgba(70, 164, 217, 0.5)')
+          .attr('class', 'data-option-1 bar primary')
+          .attr('x', (d, i) => {
+            return i * (width / parsedR1Data.length);
+          })
+          .attr('y', d => {
+            let amount = d.value;
+            return yScale(amount);
+          })
+          .attr('width', width / parsedR1Data.length - barPadding)
+          .attr('height', d => {
+            let amount = d.value;
+            return height - yScale(amount);
+          });
+      }
+
+      let dataOptions2 = svg.selectAll('.data-option-2');
+      if (dataOptions2[0].length === 0) {
+        dataOptions2
         .data(parsedR2Data)
         .enter()
         .append('rect')
         .attr('fill', 'rgba(217, 70, 70, 0.5)')
-        .attr('class', 'bar primary')
+        .attr('class', 'data-option-2 bar primary')
         .attr('x', (d, i) => {
           return i * (width / parsedR2Data.length);
         })
@@ -170,28 +236,27 @@ class Home extends React.Component {
           let amount = d.value;
           return height - yScale(amount);
         });
+      } else {
+        svg.selectAll('.data-option-2')
+          .data(parsedR2Data)
+          .transition()
+          .attr('fill', 'rgba(217, 70, 70, 0.5)')
+          .attr('class', 'data-option-2 bar primary')
+          .attr('x', (d, i) => {
+            return i * (width / parsedR2Data.length);
+          })
+          .attr('y', d => {
+            let amount = d.value;
+            return yScale(amount);
+          })
+          .attr('width', width / parsedR2Data.length - barPadding)
+          .attr('height', d => {
+            let amount = d.value;
+            return height - yScale(amount);
+          });
+      }
+      // debugger;
 
-      // svg.append('g')
-      //   .attr('class', 'month-axis')
-      //   .attr('transform', 'translate(0,' + (height + 1) + ')')
-      //   .call(monthAxis);
-
-      svg.append('g')
-        .attr('class', 'year-axis')
-        .attr('transform', 'translate(0,' + height + ')')
-        .call(yearAxis);
-
-      svg.append('g')
-        .attr('class', 'y-axis')
-        .attr('transform', 'translate(' + 0 + ', 0)')
-        .call(yAxis)
-      .append('text')
-        .attr('transform', 'rotate(0)')
-        .attr('y', 6)
-        .attr('dy', '-1rem')
-        .attr('dx', '5rem')
-        .style('text-anchor', 'end')
-        .text('Monthly Price ($)');
     });
 
 
@@ -296,6 +361,7 @@ class Home extends React.Component {
     return (
       <div className="content">
         <h1>Monthly Median Rent</h1>
+        <p>1 Bedroom</p>
         <div className="compare-options group">
           <div className="option">
             <select value={this.state.regionName} onChange={this._handleOption1Change.bind(this)}>

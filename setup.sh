@@ -3,8 +3,8 @@ bundle install
 npm install
 git config --local user.name mike
 git config --local user.email mwwmail@gmail.com
-bundle exec rake db:setup
-bundle exec rake db:seed
+bundle exec rails db:setup
+bundle exec rails db:seed
 apm install linter-eslint
 apm enable linter-eslint
 apm install pigments
