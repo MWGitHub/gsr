@@ -20,7 +20,7 @@ class App extends React.Component {
 
 var router = (
   <Router history={browserHistory}>
-    <Route path='/' component={App}>
+    <Route path='/gsr' component={App}>
       <IndexRoute component={Home} />
 
       <Route path='*' component={NotFound} />

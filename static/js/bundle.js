@@ -7858,7 +7858,7 @@
 	  { history: _reactRouter.browserHistory },
 	  _react2.default.createElement(
 	    _reactRouter.Route,
-	    { path: '/', component: App },
+	    { path: '/gsr', component: App },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _home2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '*', component: _notFound2.default })
 	  )
@@ -32876,7 +32876,7 @@
 	      var height = 400 - margin.top - margin.bottom;
 	      var padding = 60;
 	
-	      _d2.default.csv('/static/data/Neighborhood_MedianRentalPrice_1Bedroom.csv', function (data) {
+	      _d2.default.csv('/gsr/static/data/Neighborhood_MedianRentalPrice_1Bedroom.csv', function (data) {
 	        var regionOneData = null;
 	        var regionTwoData = null;
 	        for (var i = 0; i < data.length; ++i) {
@@ -33070,7 +33070,7 @@
 	    value: function getOptions() {
 	      var _this3 = this;
 	
-	      _d2.default.csv('/static/data/Neighborhood_MedianRentalPrice_1Bedroom.csv', function (data) {
+	      _d2.default.csv('/gsr/static/data/Neighborhood_MedianRentalPrice_1Bedroom.csv', function (data) {
 	        var options = [];
 	        var dupeHash = {};
 	        for (var i = 0; i < data.length; ++i) {
