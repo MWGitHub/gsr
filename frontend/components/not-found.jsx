@@ -6,6 +6,7 @@ class NotFound extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div className="status-page">
         <h1>404</h1>
