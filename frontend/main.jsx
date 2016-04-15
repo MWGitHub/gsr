@@ -4,6 +4,7 @@ import { Router, Route, IndexRoute, browserHistory, Redirect } from 'react-route
 import co from 'co';
 
 import NotFound from './components/not-found';
+import Home from './components/home';
 
 class App extends React.Component {
   render() {
@@ -14,16 +15,6 @@ class App extends React.Component {
         </div>
       </div>
     );
-  }
-}
-
-class Home extends React.Component {
-  render() {
-    return (
-      <div>
-        <p>Test</p>
-      </div>
-    )
   }
 }
 
