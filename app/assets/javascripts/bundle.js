@@ -7864,7 +7864,7 @@
 	  )
 	);
 	
-	$(function () {
+	document.addEventListener('DOMContentLoaded', function (e) {
 	  var render = function render() {
 	    _reactDom2.default.render(router, $('#content')[0]);
 	  };

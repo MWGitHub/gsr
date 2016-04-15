@@ -28,9 +28,9 @@ var router = (
   </Router>
 );
 
-$(function () {
+document.addEventListener('DOMContentLoaded', e => {
   let render = function() {
-    ReactDOM.render(router, $('#content')[0]);
+    ReactDOM.render(router, document.getElementById('content'));
   };
 
   render();

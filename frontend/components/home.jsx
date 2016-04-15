@@ -26,7 +26,7 @@ class Home extends React.Component {
     const height = 400 - margin.top - margin.bottom;
     let padding = 60;
 
-    d3.csv('/data/Neighborhood_MedianRentalPrice_1Bedroom.csv', data => {
+    d3.csv('/static/data/Neighborhood_MedianRentalPrice_1Bedroom.csv', data => {
       let regionOneData = null;
       let regionTwoData = null;
       for (let i = 0; i < data.length; ++i) {
@@ -308,7 +308,7 @@ class Home extends React.Component {
   }
 
   getOptions() {
-    d3.csv('/data/Neighborhood_MedianRentalPrice_1Bedroom.csv', data => {
+    d3.csv('/static/data/Neighborhood_MedianRentalPrice_1Bedroom.csv', data => {
       let options = [];
       let dupeHash = {};
       for (let i = 0; i < data.length; ++i) {

@@ -1,0 +1,85 @@
+.group:after {
+  content: '';
+  clear: both;
+  display: block;
+}
+
+.content {
+  width: 100%;
+  text-align: center;
+}
+
+.compare-options {
+  .option {
+    float: left;
+    width: 50%;
+    margin-right: 0%;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+
+.tract {
+  fill: #eee;
+}
+
+.tract:hover {
+  fill: orange;
+}
+
+.tract-border {
+  fill: none;
+  stroke: #777;
+  pointer-events: none;
+}
+
+.y-axis path,
+.y-axis line {
+	fill: none;
+	stroke: black;
+	shape-rendering: crispEdges;
+}
+
+.y-axis text {
+	font-family: sans-serif;
+	font-size: 11px;
+}
+
+.month-axis text {
+  font: 10px sans-serif;
+}
+
+.month-axis path {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.month-axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.year-axis text {
+  font: 10px sans-serif;
+}
+
+.year-axis path {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.year-axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar.primary {
+  background-color: rgba(70, 164, 217, 0.5);
+}

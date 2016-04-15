@@ -4,7 +4,7 @@ module.exports = {
   context: __dirname,
   entry: ['babel-polyfill' ,'./frontend/main.jsx'],
   output: {
-    path: path.join(__dirname, 'app', 'assets', 'javascripts'),
+    path: path.join(__dirname, 'static', 'js'),
     filename: 'bundle.js'
   },
   resolve: {
